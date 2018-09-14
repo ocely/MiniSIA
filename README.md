@@ -1,2 +1,2 @@
 # super-goggles
-MiniSia deforme desarrollado por Ferdy Larrota y Omar Cely :v
+MiniSia deforme desarrollado por Ferdy Larrotta y Omar Cely :v
