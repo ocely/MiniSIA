@@ -22,21 +22,19 @@ public class Estudiante {
     public Estudiante(String nombre, long id, String programa_curricular, String nacimiento){
     this.nombre = nombre;
     this.id = id;
-    grupo = new ArrayList<>();
+    this.grupo = new ArrayList();
     this.programacurricular = SIA.buscarProgramaCurricularPorNombre(programa_curricular);//Haz esto :"v
-    this.grupo = null;
     this.nacimiento = nacimiento;
-    this.notas = null;
+    this.notas = new ArrayList();
     }
     
     public Estudiante(String nombre, long id, int programa_curricular, String nacimiento){
     this.nombre = nombre;
     this.id = id;
-    grupo = new ArrayList<>();
+    this.grupo = new ArrayList();
     this.programacurricular = SIA.buscarProgramaCurricularPorCodigo(programa_curricular);//Podria tener bug
-    this.grupo = null;
     this.nacimiento = nacimiento;
-    this.notas = null;
+    this.notas = new ArrayList();
     }
     public String getNombre(){
         return this.nombre;
@@ -78,6 +76,10 @@ public class Estudiante {
         this.grupo = grupo;
     }
     
+    public void setGrupo(Grupo grupo){
+        this.grupo.add(grupo);
+    }
+    
     public void setNacimiento(String nacimiento){
         this.nacimiento = nacimiento;
     }
@@ -86,21 +88,57 @@ public class Estudiante {
         this.notas = notas;
     }
     
-    private String grupos (){
+    public void setNotas(Notas nota){
+    this.notas.add(nota);
+    }
+    
+    private ArrayList<Notas> buscarCalificacionesDelEstudiantePorGrupo(Grupo grupo){
+         
+        ArrayList <Notas> calificaciones = new ArrayList();
+        if(grupo.getNotas().isEmpty() || grupo.getNotas() == null ){
+        calificaciones = null;
+        }else{
+        for (int i = 0; i<grupo.getNotas().size(); i++){
+             if(grupo.getNotas().get(i).getEstudiante().getId()== this.id){
+             calificaciones.add(grupo.getNotas().get(i));
+             }
+         }
+        }
+         return calificaciones;
+        
+    }
+    
+    private String imprimirGrupos (){
         String a = new String ();
+        if(grupo == null || grupo.isEmpty()){
+        a = ", No hay grupos asignados aun.";
+        }else{
         for (int i = 0; i<grupo.size(); i++){
-            a.concat(String.valueOf(grupo.get(i).getIdentificador()));
-            a.concat("  ");
-            a.concat(String.valueOf(grupo.get(i).getMateria()));
-            a.concat("  ");
-            a.concat(String.valueOf(grupo.get(i).getNotas()));
-            a.concat("  ");
+            a = a.concat(". Grupo ");
+            a = a.concat(String.valueOf(grupo.get(i).getIdentificador()));
+            a = a.concat(" de ");
+            a = a.concat(grupo.get(i).getAsignatura().getNombre());
+            a = a.concat(", con calificaciones de: ");
+                if(buscarCalificacionesDelEstudiantePorGrupo(grupo.get(i)) == null || buscarCalificacionesDelEstudiantePorGrupo(grupo.get(i)).isEmpty()){
+                a = a.concat("*No hay calificaciones asignadas");
+                }else{
+                for(int j = 0; i<buscarCalificacionesDelEstudiantePorGrupo(grupo.get(i)).size(); j++){
+                     a = a.concat(String.valueOf(buscarCalificacionesDelEstudiantePorGrupo(grupo.get(i)).get(j).getValor()));
+                     a = a.concat(", ");
+                }
+                }
+            a = a.concat(", ");
+        }
         }
         return a;
     }
     
     @Override
     public String toString(){
-        return "Estudiante: "+nombre+" Id: "+id+ " Grupo: "+grupos()+" Nacimiento: "+nacimiento;
+        String impresion = new String();
+        impresion =  "Estudiante: " +nombre+ ". Id: "+id ;
+        impresion = impresion.concat(imprimirGrupos());
+        impresion = impresion.concat(". Nacimiento: "+nacimiento);
+        return impresion;
     }
 }

@@ -101,16 +101,28 @@ public static ArrayList<Asignatura> todas_las_asignaturas;
          return null;
         }
         
+         public static Asignatura buscarAsignaturaPorNombre(String nombre){
+         for(int i = 0; i<todas_las_asignaturas.size(); i++){
+             
+         if (nombre.equals(todas_las_asignaturas.get(i).getNombre())){
+         return todas_las_asignaturas.get(i);
+         }
+         }
+         return null;
+        }
+        
     public static void main(String args[]) {
         boolean en_ejecucion = true;
         
-        todos_los_programas_curriculares = new ArrayList<>();
-        todos_los_grupos = new ArrayList<>();
-        todos_los_estudiantes = new ArrayList<>();
-        todas_las_facultades = new ArrayList<>();
-        todos_los_profesores= new ArrayList<>();
-        todos_los_salones = new ArrayList<>();
-        todas_las_asignaturas = new ArrayList<>();
+        todos_los_programas_curriculares = new ArrayList();
+        todos_los_grupos = new ArrayList();
+        todos_los_estudiantes = new ArrayList();
+        todas_las_facultades = new ArrayList();
+        todos_los_profesores= new ArrayList();
+        todos_los_salones = new ArrayList();
+        todas_las_asignaturas = new ArrayList();
+        
+        /////TODO ESTO ES LA INSTANCIACION, YA QUE HAY MUCHAS CLASES
         
         Facultad facultad1 = new Facultad("Ingenieria",1);
         Facultad facultad2 = new Facultad("Ciencias", 2);
@@ -136,8 +148,8 @@ public static ArrayList<Asignatura> todas_las_asignaturas;
         todos_los_grupos.add(grupo2);
         todos_los_grupos.add(grupo3);
         todos_los_grupos.add(grupo4);
-        Estudiante estudiante1 = new Estudiante("Omar Andres Cely Villate", 1002697298, "Ingenieria Electronica", "02/09/2001");
-        Estudiante estudiante2 = new Estudiante("Pedro Alonso Jimenez Rodriguez", 1002697298, 1, "02/09/2001");
+        Estudiante estudiante1 = new Estudiante("Omar Andres Cely Villate", 1002697299, "Ingenieria Electronica", "02/09/2001");
+        Estudiante estudiante2 = new Estudiante("Ferdy Eduardo Larrotta", 1002697298, 1, "02/09/2001");
         todos_los_estudiantes.add(estudiante1);
         todos_los_estudiantes.add(estudiante2);
         Profesor profesor1 = new Profesor ("Alexei Ochoa", 100123456, "02/09/1990");
@@ -147,8 +159,11 @@ public static ArrayList<Asignatura> todas_las_asignaturas;
         Notas nota1 = new Notas(1, 1002697298, 3.5, 100123456);
         Notas nota2 = new Notas(3, 1002697298, 3, 100123457);
         
+        //AQUI SE TERMINA LA INSTANCIACION
         
-        System.out.print(profesor1.toString());
+        estudiante2.setGrupo(grupo1);
+        estudiante2.setNotas(nota1);
+        System.out.print(estudiante2.toString());
     }
     
 }

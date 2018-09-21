@@ -18,6 +18,7 @@ public class Notas {
     this.profesor = SIA.buscarProfesor(profesor);
     }
     
+    
     public Grupo getGrupo(){
     return this.grupo;
     }

@@ -13,6 +13,7 @@ public class Salon {
     
     public Salon(long identificador){
     this.identificador = identificador;
+    this.grupo = new ArrayList();
     }
     
     public long getIdentificador(){
@@ -29,6 +30,9 @@ public class Salon {
     
     public void setGrupo(ArrayList<Grupo> grupo){
     this.grupo = grupo;
+    }
+    public void setGrupo(Grupo grupo){
+    this.grupo.add(grupo);
     }
     
     @Override

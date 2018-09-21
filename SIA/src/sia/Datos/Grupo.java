@@ -8,7 +8,7 @@ public class Grupo {
     private Profesor profesor;
     private String horario;
     private ArrayList<Estudiante> estudiante;
-    private String materia;
+    private Asignatura asignatura;
     private ArrayList<Notas> notas;
     private Salon salon;
 
@@ -16,13 +16,13 @@ public class Grupo {
         this(-1,-1,"Sin horario hasta la semana 16 :c ", "No hay materia asignada", -1 );
     }
 
-    public Grupo(int identificador, long profesor, String horario, String materia, int salon){
+    public Grupo(int identificador, long profesor, String horario, String asignatura, int salon){
     this.identificador = identificador;
     this.profesor = SIA.buscarProfesor(profesor);
     this.horario = horario;
-    this.estudiante = null;
-    this.materia = materia;
-    this.notas = null;
+    this.estudiante = new ArrayList();
+    this.asignatura = SIA.buscarAsignaturaPorNombre(asignatura); ////Hacer la funci[on de buscar
+    this.notas = new ArrayList();
     this.salon = SIA.buscarSalon(salon);
     }
 
@@ -57,13 +57,17 @@ public class Grupo {
     public void setEstudiante(ArrayList<Estudiante> estudiante){
         this.estudiante = estudiante;
     }
-
-    public String getMateria(){
-        return this.materia;
+    
+    public void setEstudiante(Estudiante estudiante){
+        this.estudiante.add(estudiante);
     }
 
-    public void setMateria(String materia){
-        this.materia = materia;
+    public Asignatura getAsignatura(){
+        return this.asignatura;
+    }
+
+    public void setAsignatura(Asignatura asignatura){
+        this.asignatura = asignatura;
     }
 
     public ArrayList<Notas> getNotas(){
@@ -72,6 +76,10 @@ public class Grupo {
 
     public void setNotas(ArrayList<Notas> notas){
         this.notas = notas;
+    }
+    
+    public void setNotas(Notas nota){
+        this.notas.add(nota);
     }
 
     public Salon getSalon(){

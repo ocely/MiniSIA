@@ -11,16 +11,17 @@ public class Profesor {
     private String nacimiento;
     
     public Profesor(){
-    
+    this("*Sin nombre", -1, "*Sin fecha de nacimiento");
     }
     
     public Profesor(String nombre, long id, String nacimiento){
     this.nombre = nombre;
     this.id = id;
     this.nacimiento = nacimiento;
-    this.notas = null;
-    this.grupo = null;
+    this.notas = new ArrayList();
+    this.grupo = new ArrayList();
     }
+    
     public ArrayList<Notas> getNotas(){
         return this.notas;
     }
@@ -53,6 +54,10 @@ public class Profesor {
         this.notas = notas;
     }
     
+    public void setNotas(Notas nota){
+        this.notas.add(nota);
+    }
+    
     public void setNacimiento(String nacimiento){
         this.nacimiento = nacimiento;
     }
@@ -60,14 +65,24 @@ public class Profesor {
     public void setGrupo(ArrayList<Grupo> grupo){
         this.grupo = grupo;
     }
+    public void setGrupo(Grupo grupo){
+        this.grupo.add(grupo);
+    }
 
-     private String grupos (){
+     private String imprimirGrupos (){
         String a = new String ();
+    
+        if(grupo == null || grupo.isEmpty()){
+        a = ", *No hay Grupos Asignados aun.";
+        }else{
+             a = a.concat(", Da clases en los grupos: ");   
         for (int i = 0; i<grupo.size(); i++){
-            a = a.concat(String.valueOf(grupo.get(i).getMateria()));
-            a = a.concat("  ");
             a = a.concat(String.valueOf(grupo.get(i).getIdentificador()));
-            a = a.concat("  ");
+            a = a.concat(" de ");
+            a = a.concat(grupo.get(i).getAsignatura().getNombre());
+            a = a.concat(", ");
+        }
+        a = a.concat(". ");
         }
         return a;
     }
@@ -75,7 +90,10 @@ public class Profesor {
     @Override 
     
     public String toString(){
-        return "Nombre: " +nombre+" Id: "+id+" Grupos: "+grupos();
+        String impresion = new String();
+        impresion = "Nombre: " +nombre+" , Id: "+id;
+        impresion = impresion.concat(imprimirGrupos());
+        return impresion;
     }
     
 }

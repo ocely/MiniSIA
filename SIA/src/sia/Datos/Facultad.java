@@ -15,7 +15,7 @@ public class Facultad {
     public Facultad(String nombre, int codigo){
     this.nombre = nombre;
     this. codigo = codigo;
-    this.programacurricular = null;
+    this.programacurricular = new ArrayList();
     }
     
     public String getNombre(){
@@ -39,6 +39,9 @@ public class Facultad {
     
     public void setProgramaCurricular(ArrayList<ProgramaCurricular> programacurricular){
     this.programacurricular = programacurricular;
+    }
+    public void setProgramaCurricular(ProgramaCurricular programacurricular){
+    this.programacurricular.add(programacurricular);
     }
     
 }

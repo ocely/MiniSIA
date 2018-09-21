@@ -13,6 +13,7 @@ public class Asignatura {
     public Asignatura(String nombre, int identificador){
       this.nombre = nombre;
       this.identificador = identificador;
+      this.grupo = new ArrayList();
     }
     public String getNombre(){
       return this.nombre;
@@ -29,6 +30,10 @@ public class Asignatura {
     public void setGrupo(ArrayList<Grupo> grupo){
       this.grupo = grupo;
     }
+    
+    public void setGrupo(Grupo grupo){
+      this.grupo.add(grupo);
+    }
 
     public int getIdentificador(){
       return this.identificador;
@@ -41,10 +46,10 @@ public class Asignatura {
     private String grupos (){
         String a = new String ();
         for (int i = 0; i<grupo.size(); i++){
-            a.concat(String.valueOf(grupo.get(i).getIdentificador()));
-            a.concat("  ");
-            a.concat(String.valueOf(grupo.get(i).getMateria()));
-            a.concat("  ");
+            a = a.concat(String.valueOf(grupo.get(i).getIdentificador()));
+            a = a.concat("  ");
+            a = a.concat(String.valueOf(grupo.get(i).getAsignatura()));
+            a = a.concat("  ");
         }
         return a;
     }

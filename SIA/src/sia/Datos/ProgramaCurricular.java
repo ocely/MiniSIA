@@ -16,7 +16,7 @@ public class ProgramaCurricular {
     this.codigo = codigo;
     this.nombre = nombre;
     this.facultad = SIA.buscarFacultadPorNombre(facultad);
-    this.estudiante = null;
+    this.estudiante = new ArrayList();
     }
     
     public ProgramaCurricular( int codigo, String nombre, int facultad){
@@ -56,6 +56,9 @@ public class ProgramaCurricular {
     
     public void setEstudiante (ArrayList<Estudiante> estudiante){
         this.estudiante = estudiante;
+    }
+    public void setEstudiante (Estudiante estudiante){
+        this.estudiante.add(estudiante);
     }
             
     @Override 
